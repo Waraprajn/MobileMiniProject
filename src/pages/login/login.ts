@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { HomePage } from '../home/home';
+import { AuthserviceProvider } from '../../providers/authservice/authservice';
+import { TabsPage } from '../tabs/tabs';
 
 /**
  * Generated class for the LoginPage page.
@@ -22,7 +24,8 @@ export class LoginPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public alertCtrl: AlertController) {
+    public alertCtrl: AlertController,
+    public authService: AuthserviceProvider ) {
 
     }
     ionViewDidEnter(){
@@ -37,7 +40,9 @@ export class LoginPage {
           buttons: ['OK']
         }).present();
       }else{
-        this.navCtrl.push(HomePage);
+        this.navCtrl.push(TabsPage);
+        this.authService.login();
+
       }
     }
 

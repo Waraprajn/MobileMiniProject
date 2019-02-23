@@ -5,6 +5,7 @@ import { ContactPage } from '../contact/contact';
 import { HomePage } from '../home/home';
 import { NavController } from 'ionic-angular';
 import { LoginPage } from '../login/login';
+import { AuthserviceProvider } from '../../providers/authservice/authservice';
 
 @Component({
   templateUrl: 'tabs.html'
@@ -16,10 +17,15 @@ export class TabsPage {
   tab3Root = ContactPage;
 
   login = false;
-  constructor( public navCtrl: NavController) {
+  constructor( public navCtrl: NavController,
+               public auth: AuthserviceProvider) {
 
   }
   ionViewWillEnter(){
-   this.navCtrl.push(LoginPage)
+   if(this.auth.isLoggedIn == false){
+     this.navCtrl.push(LoginPage)
+   }else{
+     console.log("login success");
+   }
   }
 }
